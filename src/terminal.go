@@ -600,6 +600,7 @@ const (
 	actChangePreviewWindow
 	actChangePrompt
 	actChangeQuery
+	actChangeInfoCommand
 
 	actClearScreen
 	actClearQuery
@@ -792,6 +793,7 @@ func processExecution(action actionType) bool {
 		actBgTransformSearch,
 		actPreview,
 		actChangePreview,
+		actChangeInfoCommand,
 		actRefreshPreview,
 		actExecute,
 		actExecuteSilent,
@@ -8495,6 +8497,11 @@ func (t *Terminal) Loop() error {
 					t.previewOpts.command = a.a
 					updatePreviewWindow(false)
 					refreshPreview(t.previewOpts.command)
+				}
+			case actChangeInfoCommand:
+				if t.infoCommand != a.a {
+					t.infoCommand = a.a
+					req(reqInfo)
 				}
 			case actChangePreviewWindow:
 				// NOTE: We intentionally use "previewOpts" instead of "activePreviewOpts" here

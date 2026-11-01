@@ -2113,6 +2113,8 @@ func isExecuteAction(str string) actionType {
 		return actChangePrompt
 	case "change-query":
 		return actChangeQuery
+	case "change-info-command":
+		return actChangeInfoCommand
 	case "change-multi":
 		return actChangeMulti
 	case "change-nth":
